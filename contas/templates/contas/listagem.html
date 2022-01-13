@@ -1,24 +1,28 @@
+{% extends './home.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem | contas</title>
+    <title>{% block title %}Listagem | contas{% endblock title %}</title>
 </head>
+
 <body>
+    {% block content %}
     <h1>Listagem | contas</h1>
+    <br/>
+    <div style="background-color: #bdbdbd; text-align: center; width:100%; height: 100%;">
     <ul>
     {% for transacao in transacoes%}
-        <li> <a href="{% url 'update_transacao' transacao.id %}">
-            <b>transação:</b> {{transacao.descriacao}} - {{transacao.data_str}} - {{transacao.valo_rs}} | Categoria: {{transacao.categoria}}
-            Alterar transação</a></li>   
-            <a href="{% url 'delete_transacao' transacao.id %}">Excluir transação</a>
+         <b>Sua transação:</b> {{transacao.descriacao}} - {{transacao.data_str}} - {{transacao.valo_rs}} | Categoria: {{transacao.categoria}}
+         <button type="button"><a href="{% url 'update_transacao' transacao.id %}">Alterar transação</a></button>
+        <button><a href="{% url 'delete_transacao' transacao.id %}">Excluir transação</a></button>
             <hr>
     {% endfor %}
     </ul>
-    <a href="{% url 'nova_transacao' %}">Criar nova transação</a>
-  
-   
+    <button><a href="{% url 'nova_transacao' %}">Criar nova transação</a></button>
+    {% endblock %}
+    </div>
 </body>
 </html>

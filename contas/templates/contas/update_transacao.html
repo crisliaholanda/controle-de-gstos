@@ -1,20 +1,37 @@
+{% extends './home.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar transação</title>
+    <title>{% block title %}Alterar transação{% endblock %}</title>
 </head>
 <body>
+    {% block content %}
+    <h1>Transação | Alterações</h1>
     <form method="POST">
+    <div style="
+        display:block;
+        background-color: #98adc2; 
+        margin-top:80px;
+        width:50%; height: 150%; position: relative;
+        ">
+    <div style="align-items: center;">
+
         {% csrf_token %}
             {{form.as_p}}
 
         <button type="submit">Salvar</button>
         {% if transacao %}
-        <a href="{% url 'delete_transacao' transacao.id %}">Excluir</a>
+        <button><a href="{% url 'delete_transacao' transacao.id %}">Excluir</a></button>
         {% endif %}
+
+    </div>
+    </div>
     </form>
+
+   
+    {% endblock %}
 </body>
 </html>
